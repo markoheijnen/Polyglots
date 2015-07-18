@@ -10,7 +10,7 @@ if ( ! defined('ABSPATH') ) {
 	exit;
 }
 
-class Polyglots_GlotPress {
+class Polyglots_Developer {
 
 	public function __construct() {
 		add_filter( 'extra_plugin_headers', array( $this, 'add_customer_header' ) );
