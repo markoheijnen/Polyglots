@@ -14,7 +14,7 @@ class Polyglots_Themes {
 	public function __construct() {
 		add_filter( 'polyglots_dashboard_counts', array( $this, 'get_active_theme_count' ), 9 );
 
-		$this->glotpress = new Polyglots_GlotPress( Polyglots_Config::get_locale() );
+		$this->glotpress = new Polyglots_GlotPress;
 	}
 
 	public function get_active_theme_count( $counts = array() ) {

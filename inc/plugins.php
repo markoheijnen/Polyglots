@@ -17,7 +17,7 @@ class Polyglots_Plugins {
 		add_filter( 'plugin_action_links', array( $this, 'plugin_action_links' ), 10, 3 );
 		add_action( 'after_plugin_row', array( $this, 'after_plugin_row' ), 10, 3 );
 
-		$this->glotpress = new Polyglots_GlotPress( Polyglots_Config::get_locale() );
+		$this->glotpress = new Polyglots_GlotPress;
 	}
 
 

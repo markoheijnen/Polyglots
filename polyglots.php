@@ -89,7 +89,7 @@ class Polyglots {
 	}
 
 	public function dashboard_widget() {
-		$glotpress = new Polyglots_GlotPress( Polyglots_Config::get_locale() );
+		$glotpress = new Polyglots_GlotPress;
 
 		$items = array(
 			'core' => array( 'title' => 'Core', 'count' => $glotpress->get_core_projects() )

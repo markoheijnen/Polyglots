@@ -12,17 +12,28 @@ class Polyglots_GlotPress {
 	private $locale;
 	private $variant;
 
-	public function __construct( $locale, $variant = 'default' ) {
-		$this->locale  = $locale;
-		$this->variant = $variant;
+	public function __construct( $locale = '', $variant = 'default' ) {
+		if ( $locale ) {
+			$this->locale  = $locale;
+			$this->variant = $variant;
+		}
+		else {
+			$this->locale  = Polyglots_Config::get_locale();
+			$this->variant = Polyglots_Config::get_locale_variant();
+		}
 	}
 
 
 	public function get_core_projects() {
 		if ( false === ( $percentage = Polyglots_Cache::get_value( 'core', Polyglots_Cache_Groups::general ) ) ) {
 			$percentage = 0;
-			$url        = 'https://translate.wordpress.org/api/languages/' . $this->locale_to_slug();
+			$slug       = $this->locale_to_slug();
 
+			if ( ! $slug ) {
+				return $percentage;
+			}
+
+			$url      = 'https://translate.wordpress.org/api/languages/' . $slug;
 			$response = wp_remote_get( $url );
 			$body     = wp_remote_retrieve_body( $response );
 
@@ -39,7 +50,7 @@ class Polyglots_GlotPress {
 							continue;
 						}
 
-						if ( $set->slug == 'formal' || $set->slug == 'informal' ) {
+						if ( $set->slug != $this->variant ) {
 							continue;
 						}
 
@@ -113,13 +124,14 @@ class Polyglots_GlotPress {
 		return $data;
 	}
 
-
-
 	public function locale_to_slug() {
 		$locale = Polyglots_Locales::by_field( 'wp_locale', $this->locale );
-		$slug   = $locale->slug;
 
-		return $slug;
+		if ( $locale ) {
+			return $locale->slug;
+		}
+
+		return false;
 	}
 
 }
