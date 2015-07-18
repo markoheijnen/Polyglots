@@ -27,7 +27,7 @@ class Polyglots_Plugins {
 		foreach ( $plugins as $path => $plugin_data ) {
 			if ( is_plugin_active( $path ) ) {
 				$plugin_data['slug'] = dirname( $path );
-				$data                = $this->glotpress->get_plugin_project( $plugin_data['slug'] );
+				$data                = $this->glotpress->get_plugin_project( $plugin_data );
 
 				if ( isset( $data['sets'] ) ) {
 					$sets = wp_list_filter( $data['sets']->translation_sets, array( 'wp_locale' => Polyglots_Config::get_locale(), 'slug' => Polyglots_Config::get_locale_variant() ) );
@@ -58,7 +58,6 @@ class Polyglots_Plugins {
 	}
 
 	public function after_plugin_row( $plugin_file, $plugin_data, $status ) {
-		$slug          = isset($plugin_data['slug']) ? $plugin_data['slug'] : '';
 		$wp_list_table = _get_list_table('WP_Plugins_List_Table');
 
 		$class = 'plugin-polyglots-info';
@@ -68,7 +67,7 @@ class Polyglots_Plugins {
 		}
 
 		echo '<tr class="' . $class . '"><td colspan="' . esc_attr( $wp_list_table->get_column_count() ) . '" class="colspanchange">';
-		$data = $this->glotpress->get_plugin_project( $slug );
+		$data = $this->glotpress->get_plugin_project( $plugin_data );
 
 		
 		if ( $data && $data['url'] ) {

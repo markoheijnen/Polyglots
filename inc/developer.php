@@ -17,8 +17,8 @@ class Polyglots_Developer {
 	}
 
 	public function add_customer_header( $headers ) {
-		$headers[] = 'Translation Project';
 		$headers[] = 'Translation Site';
+		$headers[] = 'Translation Project';
 
 		return $headers;
 	}

@@ -101,28 +101,21 @@ class Polyglots_GlotPress {
 	}
 
 
-	public function get_plugin_project( $slug ) {
-		if ( ! isset( $slug ) ) {
+	public function get_plugin_project( $plugin_data ) {
+		if ( ! isset( $plugin_data['slug'] ) ) {
 			return false;
 		}
 
-		if ( false === ( $data = Polyglots_Cache::get_value( $slug, Polyglots_Cache_Groups::plugin ) ) ) {
-			$data = array( 'url' => false, 'dot_org' => false );
+		if ( false === ( $data = Polyglots_Cache::get_value( $plugin_data['slug'], Polyglots_Cache_Groups::plugin ) ) ) {
+			$gp   = $this->get_glotpress_data( $plugin_data['slug'], 'wp-plugins', $plugin_data );
+			$data = $this->get_project_data( $gp );
 
-			$possible_repository = sprintf( 'https://translate.wordpress.org/api/projects/wp-plugins/%s/%s', $slug, Polyglots_Config::project_variant() );
-			$resp                = wp_remote_get( $possible_repository );
-
-			if ( ! is_wp_error( $resp ) && wp_remote_retrieve_response_code( $resp ) == 200 ) {
-				$data['url']     = sprintf( 'https://translate.wordpress.org/projects/wp-plugins/%s/%s', $slug, Polyglots_Config::project_variant() );
-				$data['dot_org'] = true;
-				$data['sets']    = json_decode( wp_remote_retrieve_body( $resp ) );
-			}
-
-			Polyglots_Cache::set_value( $slug, $data, Polyglots_Cache_Groups::plugin );
+			Polyglots_Cache::set_value( $plugin_data['slug'], $data, Polyglots_Cache_Groups::plugin );
 		}
 
 		return $data;
 	}
+
 
 	public function locale_to_slug() {
 		$locale = Polyglots_Locales::by_field( 'wp_locale', $this->locale );
@@ -132,6 +125,37 @@ class Polyglots_GlotPress {
 		}
 
 		return false;
+	}
+
+
+	private function get_glotpress_data( $slug, $type, $args = array() ) {
+		if ( isset( $args['Translation Site'] ) && isset( $args['Translation Project'] ) ) {
+			return array(
+				'url'     => esc_url_raw( $args['Translation Site'] ),
+				'project' => $args['Translation Project']
+			);
+		}
+		else {
+			return array(
+				'url'     => 'https://translate.wordpress.org',
+				'project' => sprintf( 'wp-plugins/%s/%s', $plugin_data['slug'], Polyglots_Config::project_variant() )
+			);
+		}
+	}
+
+	private function get_project_data( $glotpress ) {
+		$data = array( 'url' => false, 'dot_org' => false );
+
+		$possible_repository = sprintf( '%s/api/projects/%s', $glotpress['url'], $glotpress['project'] );
+		$resp                = wp_remote_get( $possible_repository );
+
+		if ( ! is_wp_error( $resp ) && wp_remote_retrieve_response_code( $resp ) == 200 ) {
+			$data['url']     = sprintf( '%s/projects/%s', $glotpress['url'], $glotpress['project'] );
+			$data['dot_org'] = true;
+			$data['sets']    = json_decode( wp_remote_retrieve_body( $resp ) );
+		}
+
+		return $data;
 	}
 
 }
