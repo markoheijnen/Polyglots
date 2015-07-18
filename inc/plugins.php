@@ -74,7 +74,7 @@ class Polyglots_Plugins {
 		if ( $data && $data['url'] ) {
 			echo '<div class="update-message">';
 
-			echo '<p>This project can be translated. <a href="' . $data['url'] . '" class="btn btn-primary">Go and translate.</a></p>';
+			echo '<p>' . __( 'This project can be translated.', 'polyglots' ) . ' <a href="' . $data['url'] . '" class="btn btn-primary">' . __( 'Go and translate.', 'polyglots' ) . '</a></p>';
 
 			if ( isset( $data['sets'] ) ) {
 				$sets = wp_list_filter( $data['sets']->translation_sets, array( 'wp_locale' => Polyglots_Config::get_locale() ) );
