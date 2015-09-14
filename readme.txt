@@ -12,7 +12,8 @@ Allows to connect your site to translate.wordpress.org
 
 Soon all plugins/themes are available on translate.WordPress.org. This plugin makes it easier to show what the status is of your active theme and plugins on the dashboard and the status of all plugins on the overview.
 
-Soon more functionality will get added.
+Soon more functionality will get added. Check out <a href="https://github.com/markoheijnen/polyglots">the GitHub repo</a> for current code and tickets.
+
 
 == Installation ==
 
