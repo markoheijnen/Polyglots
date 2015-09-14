@@ -5,13 +5,18 @@
 
 /*
 	Plugin Name: Polyglots
-	Plugin URI: https://make.wordpress.org/Polyglots
 	Description: A helper tool for our Polyglots team
 	Version: 0.1
+
+	Plugin URI: https://make.wordpress.org/Polyglots
+
 	Author: Marko Heijnen
 	Author URI: http://markoheijnen.com
-	License: GPLv2 or later
+	Donate link: https://markoheijnen.com/donate
+
+	License:     GPL2
 	Text Domain: polyglots
+	Domain Path: /languages
 */
 
 /*

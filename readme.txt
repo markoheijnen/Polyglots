@@ -1,9 +1,9 @@
 === Polyglots ===
 Contributors: markoheijnen
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CQFB8UMDTEGGG
-Tags: admin
+Donate link: https://markoheijnen.com/donate
+Tags: admin, polyglots, i18n
 Requires at least: 3.4
-Tested up to: 4.2.2
+Tested up to: 4.3
 Stable tag: 0.1
 
 Allows to connect your site to translate.wordpress.org
@@ -29,5 +29,5 @@ Soon to be filled in.
 
 == Changelog ==
 
-= 0.1.0 ( 2012-7-* ) =
+= 0.1.0 ( 2012-9-14 ) =
 * First version
