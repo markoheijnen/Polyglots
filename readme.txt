@@ -30,5 +30,5 @@ Soon to be filled in.
 
 == Changelog ==
 
-= 0.1.0 ( 2012-9-14 ) =
+= 0.1.0 ( 2015-9-14 ) =
 * First version
