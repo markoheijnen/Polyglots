@@ -138,7 +138,7 @@ class Polyglots_GlotPress {
 		else {
 			return array(
 				'url'     => 'https://translate.wordpress.org',
-				'project' => sprintf( 'wp-plugins/%s/%s', $plugin_data['slug'], Polyglots_Config::project_variant() )
+				'project' => sprintf( 'wp-plugins/%s/%s', $slug, Polyglots_Config::project_variant() )
 			);
 		}
 	}
